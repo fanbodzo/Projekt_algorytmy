@@ -196,9 +196,27 @@ class Merge_sort {
  * @param ciag - vektory ktory jest ciagiem liczb
  * @return posortowany ciag liczb w kolejnosci od najmnijeszej do najwiekszej
  */
-class Bubble_sort {
+class Bubble_sort { //1sza wersja bubble sort do przetestowania
+public:
+    void bubblesort(vector<int>& arr) {
+        int n = arr.size();
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    swap(arr[j], arr[j + 1]);
+                }
+            }
+        }
+    }
 
+private:
+    void swap(int& a, int& b) {
+        int temp = a;
+        a = b;
+        b = temp;
+    }
 };
+
 
 /**
  * @brief Klasa odpowiadajaca za sortowanie szybkie
@@ -208,8 +226,35 @@ class Bubble_sort {
  * @param ciag - vektory ktory jest ciagiem liczb
  * @return posortowany ciag liczb w kolejnosci od najmnijeszej do najwiekszej
  */
-class Quick_sort {
+class Quick_sort {//1sza wersja do przetestowania
+public:
+    void quicksort(vector<int>& arr, int low, int high) {
+        if (low < high) {
+            int pi = partition(arr, low, high);
+            quicksort(arr, low, pi - 1);
+            quicksort(arr, pi + 1, high);
+        }
+    }
 
+private:
+    int partition(vector<int>& arr, int low, int high) {
+        int pivot = arr[high];
+        int i = low - 1;
+        for (int j = low; j < high; j++) {
+            if (arr[j] < pivot) {
+                i++;
+                swap(arr[i], arr[j]);
+            }
+        }
+        swap(arr[i + 1], arr[high]);
+        return i + 1;
+    }
+
+    void swap(int& a, int& b) {
+        int temp = a;
+        a = b;
+        b = temp;
+    }
 };
 
 /**
