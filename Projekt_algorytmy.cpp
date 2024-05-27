@@ -85,41 +85,43 @@ public:
  * @return posortowany ciag liczb w kolejnosci od najmnijeszej do najwiekszej
  */
 class Heap_sort {
-    void wlasnosc_kopca(int arr[], int n, int i) {
+public:
+    void wlasnosc_kopca(vector<int>& dane, int n, int i) {
         int korzen = i; // najwiekszy element jako korzen
-        int left = 2 * i + 1; // prawe dziecko
-        int right = 2 * i + 2; // lewe dziecko
+        int left = 2 * i + 1; // lewe dziecko
+        int right = 2 * i + 2; // prawe dziecko
 
-        //czy lewe dziecko istnieje i czy jest wieksze od korzenia
-        if (left < n && arr[left] > arr[korzen])
+        // czy lewe dziecko istnieje i czy jest wieksze od korzenia
+        if (left < n && dane[left] > dane[korzen])
             korzen = left;
-        //czy prawe dziecko istnieje i czy jest wieksze od korzenia lub lewego dziecka
-        if (right < n && arr[right] > arr[korzen])
+
+        // czy prawe dziecko istnieje i czy jest wieksze od korzenia lub lewego dziecka
+        if (right < n && dane[right] > dane[korzen])
             korzen = right;
+
         // gdy najwiekszy element nie jest korzeniem
         if (korzen != i) {
-            int temp = arr[i];
-            arr[i] = arr[korzen];
-            arr[korzen] = temp;
+            swap(dane[i], dane[korzen]);
 
-            wlasnosc_kopca(arr, n, korzen);
+            // rekurencyjnie przywracanie wlasnosci kopca
+            wlasnosc_kopca(dane, n, korzen);
         }
     }
 
     // sortowanie przez kopcowanie
-    void kopiec_sort(int arr[], int n) {
-        // buodwanie kopca
+    void kopiec_sort(vector<int>& dane) {
+        int n = dane.size();
+
+        // budowanie kopca
         for (int i = n / 2 - 1; i >= 0; i--)
-            wlasnosc_kopca(arr, n, i);
+            wlasnosc_kopca(dane, n, i);
 
         for (int i = n - 1; i > 0; i--) {
             // zamiana korzenia z ostatnim elementem
-            int temp = arr[0];
-            arr[0] = arr[i];
-            arr[i] = temp;
+            swap(dane[0], dane[i]);
 
-            // zmiejszenie kopca i przwracanie wlasnosci kopca
-            wlasnosc_kopca(arr, i, 0);
+            // zmniejszenie kopca i przywracanie wlasnosci kopca
+            wlasnosc_kopca(dane, i, 0);
         }
     }
 
@@ -134,6 +136,7 @@ class Heap_sort {
  * @return posortowany ciag liczb w kolejnosci od najmnijeszej do najwiekszej
  */
 class Merge_sort {
+public:
     void merge(int* A, int left, int mid, int right) {
 
         int x = mid - left + 1;
@@ -268,9 +271,12 @@ public:
  */
 class Algorytmy {
 private:
-    //tworzymy obiekt klasy Pliki o naziwe plik
+    //tworzymy obiekty klas
     Pliki_obsluga plik;
     Bubble_sort bubble;
+    Quick_sort quick;
+    Merge_sort scalanie;
+    Heap_sort kopiec;
 public:
     //konstruktor
     Algorytmy(const string& file_name) : plik(file_name) {
@@ -278,7 +284,11 @@ public:
         plik.read_file();
         plik.wyswietl_dane();
         vector<int> dane = plik.get_data();
-        bubble.bubblesort(dane);
+        //bubble.bubblesort(dane);
+        //quick.quicksort(dane , 0 , dane.size()-1);
+        // do poprawki scalanie zmiana z tablic na vectory
+        //scalanie.merge(dane , 0 , (dane.size() - 1)/2, dane.size() - 1);
+        kopiec.kopiec_sort(dane);
         plik.set_data(dane);
         plik.wyswietl_dane();
         plik.zapisz_do_pliku(dane);
