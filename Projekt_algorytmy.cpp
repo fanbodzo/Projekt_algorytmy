@@ -43,7 +43,6 @@ public:
         plik.close();
     }
 
-    //dodac zapisywanie do pliku 
     void zapisz_do_pliku(const vector<int>& sorted_data) {
         ofstream wynik("wynik.txt");
         if (wynik.is_open()) {
@@ -69,6 +68,10 @@ public:
 
     vector<int> get_data() const {  //umozliwiam klasom dostep do kopii danych, sluzy to bezpieczenstwu zeby oryginalne dane nie zostaly naruszone
         return dane;
+    }
+    //potrzebna metoda zeby ustawic nowa wartosc dla wektora danych po sortowaniu juz
+    void set_data(const vector<int>& new_data) {
+        dane = new_data;
     }
 
 };
@@ -209,7 +212,6 @@ public:
         }
     }
 
-private:
     void swap(int& a, int& b) {
         int temp = a;
         a = b;
@@ -236,7 +238,6 @@ public:
         }
     }
 
-private:
     int partition(vector<int>& arr, int low, int high) {
         int pivot = arr[high];
         int i = low - 1;
@@ -269,12 +270,19 @@ class Algorytmy {
 private:
     //tworzymy obiekt klasy Pliki o naziwe plik
     Pliki_obsluga plik;
+    Bubble_sort bubble;
 public:
     //konstruktor
     Algorytmy(const string& file_name) : plik(file_name) {
         //odrazu odowlujemy sie zeby nam przeczytalo plik i wyswietlio pomocniczo ciag
         plik.read_file();
         plik.wyswietl_dane();
+        vector<int> dane = plik.get_data();
+        bubble.bubblesort(dane);
+        plik.set_data(dane);
+        plik.wyswietl_dane();
+        plik.zapisz_do_pliku(dane);
+        
     }
     
 
