@@ -67,7 +67,7 @@ public:
         cout << endl;
     }
 
-    vector<int> get_data() const {  //umozliwiam klasom dostep do danych
+    vector<int> get_data() const {  //umozliwiam klasom dostep do kopii danych, sluzy to bezpieczenstwu zeby oryginalne dane nie zostaly naruszone
         return dane;
     }
 
