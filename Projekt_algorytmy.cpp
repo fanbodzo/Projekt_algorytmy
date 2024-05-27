@@ -27,7 +27,7 @@ public:
     void read_file() {
         ifstream plik(nazwa);
         if (!plik.is_open()) {
-            cout << "nie mozna otworzyc pliku" << endl;
+            cout << "Nie mozna otworzyc pliku" << endl;
             return;
         }
 
@@ -44,13 +44,31 @@ public:
     }
 
     //dodac zapisywanie do pliku 
+    void zapisz_do_pliku(const vector<int>& sorted_data) {
+        ofstream wynik("wynik.txt");
+        if (wynik.is_open()) {
+            for (int num : sorted_data) {
+                wynik << num << " ";
+            }
+            wynik.close();
+            cout << "Dane zostaly zapisane do pliku wynik.txt" << endl;
+        }
+        else {
+            cout << "Nie mozna otworzyc pliku wynik.txt" << endl;
+        }
+    }
+
 
     void wyswietl_dane() {
-        cout << "liczby" << endl;
+        cout << "Liczby: " << endl;
         for (int num : dane) {
             cout << num << " ";
         }
         cout << endl;
+    }
+
+    vector<int> get_data() const {  //umozliwiam klasom dostep do danych
+        return dane;
     }
 
 };
@@ -220,7 +238,7 @@ public:
 int main()
 {
     string file_name;
-    cout << "wprowadz nazwe pliku z ciagiem liczb ktory chcesz posortowac" << endl;
+    cout << "Wprowadz nazwe pliku z ciagiem liczb, ktory chcesz posortowac." << endl;
     cin >> file_name;
     // unikamy w ten sposob niepotrzebnego wprowdzania .txt po nazwie pliku
     file_name += ".txt";
