@@ -137,37 +137,36 @@ public:
  */
 class Merge_sort {
 public:
-    void merge(int* A, int left, int mid, int right) {
-
+    void merge(vector<int>& A, int left, int mid, int right) {
         int x = mid - left + 1;
         int y = right - mid;
-        //tymczasowe tablice temp
-        int* temp_L = new int[x];
-        int* temp_R = new int[y];
 
-        // Kopiowanie danych do tablic tymczasowych L[] i R[]
+        // tymczasowe wektory temp
+        vector<int> temp_L(x);
+        vector<int> temp_R(y);
+
+        // Kopiowanie danych do wektorów tymczasowych L[] i R[]
         for (int i = 0; i < x; i++)
             temp_L[i] = A[left + i];
         for (int j = 0; j < y; j++)
             temp_R[j] = A[mid + 1 + j];
 
-        // scalanie tablic temp
-        int i = 0; // poczatakowy indeks pierwszej tablicy temp
-        int j = 0; // poczatakowy indeks pierwszej tablicy temp
-        int k = left; //  pierwszy indeks tablicy do ktorej bedziemy laczyc
+        // scalanie wektorów temp
+        int i = 0; // poczatakowy indeks pierwszego wektora temp
+        int j = 0; // poczatakowy indeks drugiego wektora temp
+        int k = left; // pierwszy indeks wektora do którego bêdziemy ³aczyæ
 
         while (i < x && j < y) {
             if (temp_L[i] <= temp_R[j]) {
                 A[k] = temp_L[i];
                 i++;
-            }
-            else {
+            } else {
                 A[k] = temp_R[j];
                 j++;
             }
             k++;
         }
-        // wrzucamy pozostale elementy ktore nie zostaly wrzucone
+        // wrzucamy pozosta³e elementy które nie zosta³y wrzucone
         while (i < x) {
             A[k] = temp_L[i];
             i++;
@@ -178,18 +177,14 @@ public:
             j++;
             k++;
         }
-        delete[]  temp_L;
-        delete[] temp_R;
     }
 
-    void mergesort(int* tab, int left, int right) {
-
+    void mergesort(vector<int>& A, int left, int right) {
         if (left < right) {
-
             int mid = left + (right - left) / 2;
-            mergesort(tab, left, mid);
-            mergesort(tab, mid + 1, right);
-            merge(tab, left, mid, right);
+            mergesort(A, left, mid);
+            mergesort(A, mid + 1, right);
+            merge(A, left, mid, right);
         }
     }
 };
@@ -283,18 +278,66 @@ public:
         //odrazu odowlujemy sie zeby nam przeczytalo plik i wyswietlio pomocniczo ciag
         plik.read_file();
         plik.wyswietl_dane();
-        vector<int> dane = plik.get_data();
-        //bubble.bubblesort(dane);
-        //quick.quicksort(dane , 0 , dane.size()-1);
-        // do poprawki scalanie zmiana z tablic na vectory
-        //scalanie.merge(dane , 0 , (dane.size() - 1)/2, dane.size() - 1);
-        kopiec.kopiec_sort(dane);
-        plik.set_data(dane);
-        plik.wyswietl_dane();
-        plik.zapisz_do_pliku(dane);
+        // zabezpieczyc plik ze jak uzytkownik wprowadzi zla nazwe pliku to wtedy kaze mu wprowadzic nazwe jeszcze raz
+        menu();
         
     }
-    
+    // metoda odpowiadajaca za menu w ktorym uzytkownik  moze wybierac algorytm do uzycia
+    void menu() {
+        int wybor;
+        bool test = false;
+        cout << "Wybierz algorytm ktory chcesz uzyc do sortowania swoich liczb poprzez wprowadznie z klawiatury liczby ktora stoi obok algorytmu" << endl;
+        cout << "1. Sortowanie babelkowe" << endl;
+        cout << "2. Sortowanie Szybkie" << endl;
+        cout << "3. Sortowanie przez Scalanie" << endl;
+        cout << "4. Sortowanie przez Kopcowanie" << endl;
+
+        vector<int> dane = plik.get_data();
+        //petla while zabezpieczajaca zeby uzytkownik nie wybral liczby innej niz z zakresu 1 - 4
+        do {
+            cin >> wybor;
+            //switch odpowiadajcy za wybor algorytmu przez uzytkownika
+            switch (wybor) {
+            case 1:
+                bubble.bubblesort(dane);
+                plik.set_data(dane);
+                plik.wyswietl_dane();
+                plik.zapisz_do_pliku(dane);
+                test = true;
+                return;
+
+            case 2:
+                quick.quicksort(dane, 0, dane.size() - 1);
+                plik.set_data(dane);
+                plik.wyswietl_dane();
+                plik.zapisz_do_pliku(dane);
+                test = true;
+                return;
+
+            case 3:
+                scalanie.merge(dane, 0, ((dane.size()) / 2) - 1, dane.size() - 1);
+                plik.set_data(dane);
+                plik.wyswietl_dane();
+                plik.zapisz_do_pliku(dane);
+                test = true;
+                return;
+
+            case 4:
+                kopiec.kopiec_sort(dane);
+                plik.set_data(dane);
+                plik.wyswietl_dane();
+                plik.zapisz_do_pliku(dane);
+                test = true;
+                return;
+
+            default:
+                cout << "Wybrana liczba nie odpowiada zadnemu algorytmowi wybierz liczbe z zakresu 1 - 4" << endl;
+                test = false;
+            }
+        } while (!test);
+
+
+    }
 
 };
 
