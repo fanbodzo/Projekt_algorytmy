@@ -3,6 +3,9 @@
 #include <vector>
 #include <string>
 #include <sstream>
+#include <cstdlib>
+#include <ctime>
+#include <chrono>
 using namespace std;
 
 /**
@@ -113,6 +116,8 @@ public:
 
     // sortowanie przez kopcowanie
     void kopiec_sort(vector<int>& dane) {
+        auto start = chrono::steady_clock::now();
+
         int n = dane.size();
 
         // budowanie kopca
@@ -126,6 +131,9 @@ public:
             // zmniejszenie kopca i przywracanie wlasnosci kopca
             wlasnosc_kopca(dane, i, 0);
         }
+        auto end = chrono::steady_clock::now(); 
+        auto diff = end - start;
+        cout << "Czas sortowania: " << chrono::duration <double, milli>(diff).count() << " ms" << endl;
     }
 
 };
@@ -141,6 +149,8 @@ public:
 class Merge_sort {
 public:
     void merge(vector<int>& A, int left, int mid, int right) {
+        auto start = chrono::steady_clock::now();
+
         int x = mid - left + 1;
         int y = right - mid;
 
@@ -180,6 +190,10 @@ public:
             j++;
             k++;
         }
+        
+        auto end = chrono::steady_clock::now(); 
+        auto diff = end - start;
+        cout << "Czas sortowania: " << chrono::duration <double, milli>(diff).count() << " ms" << endl;
     }
 
     void mergesort(vector<int>& A, int left, int right) {
@@ -189,6 +203,7 @@ public:
             mergesort(A, mid + 1, right);
             merge(A, left, mid, right);
         }
+      
     }
 };
 
@@ -203,6 +218,7 @@ public:
 class Bubble_sort { //1sza wersja bubble sort do przetestowania
 public:
     void bubblesort(vector<int>& arr) {
+        auto start = chrono::steady_clock::now();
         int n = arr.size();
         for (int i = 0; i < n - 1; i++) {
             for (int j = 0; j < n - i - 1; j++) {
@@ -211,6 +227,9 @@ public:
                 }
             }
         }
+        auto end = chrono::steady_clock::now(); 
+        auto diff = end - start;
+        cout << "Czas sortowania: " << chrono::duration <double, milli>(diff).count() << " ms" << endl;
     }
 
     void swap(int& a, int& b) {
@@ -232,11 +251,15 @@ public:
 class Quick_sort {//1sza wersja do przetestowania
 public:
     void quicksort(vector<int>& arr, int low, int high) {
+        auto start = chrono::steady_clock::now();
         if (low < high) {
             int pi = partition(arr, low, high);
             quicksort(arr, low, pi - 1);
             quicksort(arr, pi + 1, high);
         }
+        auto end = chrono::steady_clock::now(); 
+        auto diff = end - start;
+        cout << "Czas sortowania: " << chrono::duration <double, milli>(diff).count() << " ms" << endl;
     }
 
     int partition(vector<int>& arr, int low, int high) {
