@@ -25,22 +25,26 @@ public:
     Pliki_obsluga(const string& file_name) : nazwa(file_name){}
 
     void read_file() {
-        ifstream plik(nazwa);
-        if (!plik.is_open()) {
-            cout << "Nie mozna otworzyc pliku" << endl;
-            return;
-        }
-
-        string line;
-        while (getline(plik, line)) {
-            //przeksztalacanie lancucha znakow czyli naszego ciagu na liczby i umieszczenie ich w wektorze
-            stringstream ss(line);
-            int number;
-            while (ss >> number) {
-                dane.push_back(number);
+        do {
+            ifstream plik(nazwa);
+            if (!plik.is_open()) {
+                cout << "Nie mozna otworzyc pliku" << endl;
+                cout << "Wprowadz poprawna nazwe pliku: ";
+                cin >> nazwa;
+                nazwa += ".txt";
             }
-        }
-        plik.close();
+            else {
+                string line;
+                while (getline(plik, line)) {
+                    stringstream ss(line);
+                    int number;
+                    while (ss >> number) {
+                        dane.push_back(number);
+                    }
+                }
+                plik.close();
+            }
+        } while (dane.empty()); 
     }
 
     void zapisz_do_pliku(const vector<int>& sorted_data) {
@@ -56,7 +60,6 @@ public:
             cout << "Nie mozna otworzyc pliku wynik.txt" << endl;
         }
     }
-
 
     void wyswietl_dane() {
         cout << "Liczby: " << endl;
@@ -344,8 +347,10 @@ public:
 int main()
 {
     string file_name;
+
     cout << "Wprowadz nazwe pliku z ciagiem liczb, ktory chcesz posortowac." << endl;
     cin >> file_name;
+
     // unikamy w ten sposob niepotrzebnego wprowdzania .txt po nazwie pliku
     file_name += ".txt";
     Algorytmy sortowanie(file_name);
