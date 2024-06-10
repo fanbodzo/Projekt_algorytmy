@@ -250,16 +250,21 @@ public:
  */
 class Quick_sort {//1sza wersja do przetestowania
 public:
-    void quicksort(vector<int>& arr, int low, int high) {
+    void quicksort_czas(vector<int>& arr) {
         auto start = chrono::steady_clock::now();
+        quicksort(arr, 0, arr.size() - 1);
+        auto end = chrono::steady_clock::now();
+        auto diff = end - start;
+        cout << "Czas sortowania: " << chrono::duration <double, milli>(diff).count() << " ms" << endl;
+    }
+
+    void quicksort(vector<int>& arr, int low, int high) {
         if (low < high) {
             int pi = partition(arr, low, high);
             quicksort(arr, low, pi - 1);
             quicksort(arr, pi + 1, high);
+
         }
-        auto end = chrono::steady_clock::now(); 
-        auto diff = end - start;
-        cout << "Czas sortowania: " << chrono::duration <double, milli>(diff).count() << " ms" << endl;
     }
 
     int partition(vector<int>& arr, int low, int high) {
@@ -280,6 +285,7 @@ public:
         a = b;
         b = temp;
     }
+
 };
 
 /**
@@ -333,7 +339,7 @@ public:
                 return;
 
             case 2:
-                quick.quicksort(dane, 0, dane.size() - 1);
+                quick.quicksort_czas(dane); //, 0, dane.size() - 1);
                 plik.set_data(dane);
                 plik.wyswietl_dane();
                 plik.zapisz_do_pliku(dane);
