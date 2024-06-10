@@ -12,7 +12,7 @@ using namespace std;
  * @brief Klasa odpowiada za obsluge plikow
  *
  * Klasa przyjmuje nazwe pliku i otwiera go i zapisuje do pliku wynik.txt
- *
+ * :)
  * @param file_name - nazwa pliku ktory otiweramy
  * @return Zwraca otworzony plik jako vektor
  */
@@ -168,16 +168,16 @@ public:
         vector<int> temp_L(x);
         vector<int> temp_R(y);
 
-        // Kopiowanie danych do wektorów tymczasowych L[] i R[]
+        // Kopiowanie danych do wektorï¿½w tymczasowych L[] i R[]
         for (int i = 0; i < x; i++)
             temp_L[i] = A[left + i];
         for (int j = 0; j < y; j++)
             temp_R[j] = A[mid + 1 + j];
 
-        // scalanie wektorów temp
+        // scalanie wektorï¿½w temp
         int i = 0; // poczatakowy indeks pierwszego wektora temp
         int j = 0; // poczatakowy indeks drugiego wektora temp
-        int k = left; // pierwszy indeks wektora do którego bêdziemy ³aczyæ
+        int k = left; // pierwszy indeks wektora do ktï¿½rego bï¿½dziemy ï¿½aczyï¿½
 
         while (i < x && j < y) {
             if (temp_L[i] <= temp_R[j]) {
@@ -189,7 +189,7 @@ public:
             }
             k++;
         }
-        // wrzucamy pozosta³e elementy które nie zosta³y wrzucone
+        // wrzucamy pozostaï¿½e elementy ktï¿½re nie zostaï¿½y wrzucone
         while (i < x) {
             A[k] = temp_L[i];
             i++;
