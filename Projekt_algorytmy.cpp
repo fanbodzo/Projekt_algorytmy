@@ -148,8 +148,18 @@ public:
  */
 class Merge_sort {
 public:
-    void merge(vector<int>& A, int left, int mid, int right) {
+
+    void merge_czas(vector<int>& dane) {
         auto start = chrono::steady_clock::now();
+
+        mergesort(dane, 0, dane.size() - 1);
+
+        auto end = chrono::steady_clock::now();
+        auto diff = end - start;
+        cout << "Czas sortowania: " << chrono::duration <double, milli>(diff).count() << " ms" << endl;
+    }
+
+    void merge(vector<int>& A, int left, int mid, int right) {
 
         int x = mid - left + 1;
         int y = right - mid;
@@ -190,10 +200,7 @@ public:
             j++;
             k++;
         }
-        
-        auto end = chrono::steady_clock::now(); 
-        auto diff = end - start;
-        cout << "Czas sortowania: " << chrono::duration <double, milli>(diff).count() << " ms" << endl;
+    
     }
 
     void mergesort(vector<int>& A, int left, int right) {
@@ -205,6 +212,7 @@ public:
         }
       
     }
+    
 };
 
 /**
@@ -347,7 +355,7 @@ public:
                 return;
 
             case 3:
-                scalanie.merge(dane, 0, ((dane.size()) / 2) - 1, dane.size() - 1);
+                scalanie.merge_czas(dane); // , 0, ((dane.size()) / 2) - 1, dane.size() - 1);
                 plik.set_data(dane);
                 plik.wyswietl_dane();
                 plik.zapisz_do_pliku(dane);
