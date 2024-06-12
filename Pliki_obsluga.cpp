@@ -1,7 +1,5 @@
 #include "Pliki_obsluga.h"
-#include <iostream>
-#include <fstream>
-#include <sstream>
+
 
 Pliki_obsluga::Pliki_obsluga(const std::string& file_name) : nazwa(file_name) {}
 

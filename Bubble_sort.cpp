@@ -1,5 +1,6 @@
 #include "Bubble_sort.h"
 #include <ctime>
+#include <cstdlib>
 #include <algorithm>
 #include <iostream>
 

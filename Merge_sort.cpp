@@ -2,7 +2,8 @@
 #include <iostream>
 #include <algorithm>
 #include <ctime>
-#include <vector>
+#include <cstdlib>
+
 
 using namespace std;
 

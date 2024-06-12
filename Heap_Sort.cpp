@@ -1,6 +1,7 @@
 #include "Heap_sort.h"
 #include <algorithm>
-#include <chrono>
+#include <cstdlib>
+#include <ctime>
 #include <iostream>
 using namespace std;
 

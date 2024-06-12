@@ -1,6 +1,7 @@
 #include "Quick_sort.h"
-#include <chrono>
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 
 void Quick_sort::quicksort_czas(std::vector<int>& arr) {
     auto start = std::chrono::steady_clock::now();
