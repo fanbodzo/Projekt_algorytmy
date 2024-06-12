@@ -1,12 +1,3 @@
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include <string>
-#include <sstream>
-#include <cstdlib>
-#include <ctime>
-#include <chrono>
-#include <iostream>
 #include "Pliki_obsluga.h"
 #include "Bubble_sort.h"
 #include "Quick_sort.h"
