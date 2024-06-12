@@ -127,7 +127,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bubble_sort.cpp" />
+    <ClCompile Include="Heap_Sort.cpp" />
+    <ClCompile Include="Merge_sort.cpp" />
+    <ClCompile Include="Pliki_obsluga.cpp" />
     <ClCompile Include="Projekt_algorytmy.cpp" />
+    <ClCompile Include="Quick_sort.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Bubble_sort.h" />
+    <ClInclude Include="Heap_sort.h" />
+    <ClInclude Include="Merge_sort.h" />
+    <ClInclude Include="Pliki_obsluga.h" />
+    <ClInclude Include="Quick_sort.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
