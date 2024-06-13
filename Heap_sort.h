@@ -12,7 +12,6 @@
  * @param ciag - vektory ktory jest ciagiem liczb
  * @return posortowany ciag liczb w kolejnosci od najmnijeszej do najwiekszej
  */
-
 class Heap_sort {
 public:
     void wlasnosc_kopca(std::vector<int>& dane, int n, int i);

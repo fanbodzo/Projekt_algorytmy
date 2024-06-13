@@ -12,7 +12,6 @@
  * @param ciag - vektory ktory jest ciagiem liczb
  * @return posortowany ciag liczb w kolejnosci od najmnijeszej do najwiekszej
  */
-
 class Merge_sort {
 public:
     void merge_czas(std::vector<int>& dane);

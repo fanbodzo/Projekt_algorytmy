@@ -15,7 +15,6 @@
  * @param file_name - nazwa pliku ktory otiweramy
  * @return Zwraca otworzony plik jako vektor
  */
-
 class Pliki_obsluga {
 private:
     std::string nazwa;
