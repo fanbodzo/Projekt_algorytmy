@@ -7,6 +7,15 @@
 #include <string>
 #include <sstream>
 
+/**
+ * @brief Klasa odpowiada za obsluge plikow
+ *
+ * Klasa przyjmuje nazwe pliku i otwiera go i zapisuje do pliku wynik.txt
+ * :)
+ * @param file_name - nazwa pliku ktory otiweramy
+ * @return Zwraca otworzony plik jako vektor
+ */
+
 class Pliki_obsluga {
 private:
     std::string nazwa;
